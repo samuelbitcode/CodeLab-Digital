@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeLab Digital · Sites Profissionais e Automações</title>
+  <meta name="description" content="Criação de sites profissionais, chatbots inteligentes e automação de WhatsApp com a CodeLab Digital." />
+  
+  <!-- Open Graph / Preview do WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CodeLab Digital · Sites Profissionais e Automações" />
+  <meta property="og:description" content="Transforme seu negócio com um site profissional de alta performance e automações inteligentes." />
+  <meta property="og:image" content="https://codelab-digital.vercel.app/og-image.jpg" />
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233DA9FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='16 18 22 12 16 6'></polyline><polyline points='8 6 2 12 8 18'></polyline></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+
+  <!-- Estilos Extras para a Tela de Load e Cookies -->
+  <style>
+    /* Tela de Carregamento */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg, #07070D);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #loader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(61, 169, 255, 0.2);
+      border-top-color: #3DA9FF;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loader-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--tx, #F2F3F7);
+      letter-spacing: 1px;
+    }
+
+    /* Banner de Cookies */
+    #cookieBanner {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      max-width: 480px;
+      background: rgba(21, 21, 34, 0.95);
+      border: 1px solid rgba(42, 42, 64, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 20px;
+      border-radius: 16px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+    #cookieBanner.hidden {
+      transform: translateY(150px);
+      opacity: 0;
+      pointer-events: none;
+    }
+    #cookieBanner p {
+      font-size: 0.9rem;
+      color: #9AA0B4;
+      margin: 0;
+      line-height: 1.4;
+    }
+    #cookieBanner button {
+      background: linear-gradient(135deg, #3DA9FF, #8B5CF6);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    }
+    #cookieBanner button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TELA DE CARREGAMENTO -->
+  <div id="loader">
+    <div class="spinner"></div>
+    <div class="loader-text">&lt;/&gt; CodeLab Digital...</div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo">&lt;/&gt; <span>CodeLab Digital</span></a>
+
+      <nav class="nav" id="nav">
+        <a href="#beneficios">Benefícios</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#apresentacao">Apresentação</a>
+        <a href="#planos">Planos</a>
+        <a href="#faq">Dúvidas</a>
+        <a href="#contato" class="btn btn--small">Fale conosco</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="container hero__inner">
+        <div class="hero__text reveal">
+          <span class="tag">Desenvolvimento Web & Automação</span>
+          <h1>Transforme seu negócio com um <em>site profissional</em></h1>
+          <p>Conquiste mais clientes, aumente suas vendas e tenha uma presença online com automação inteligente.</p>
+          <div class="hero__buttons">
+            <a href="#planos" class="btn">Ver planos</a>
+            <a href="#" class="btn btn--ghost js-whatsapp" data-msg="Olá! Gostaria de solicitar um orçamento para meu negócio.">Solicitar orçamento</a>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal">
+          <div class="mockup">
+            <div class="mockup__bar"><i></i><i></i><i></i></div>
+            <div class="mockup__body">
+              <strong>Seu negócio sempre ativo e vendendo mais!</strong>
+              <span>Sites de alta performance com integração ao WhatsApp e IA.</span>
+              <div class="mockup__btn"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROVA SOCIAL / MÉTRICAS -->
+    <section class="section section--alt" style="padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+      <div class="container">
+        <div class="grid grid--4" style="text-align: center;">
+          <div class="reveal">
+            <h3 style="font-size: 2.5rem; color: var(--bl); margin-bottom: 4px;">100%</h3>
+            <p style="font-size: 0.95rem; color: var(--mu);">Projetos Responsivos</p>
+          </div>
+          <div class="reveal">
+            <h3 style="font-size: 2.5rem; color: var(--pu); margin-bottom: 4px;">24/7</h3>
+            <p style="font-size: 0.95rem; color: var(--mu);">Atendimento & Automação</p>
+          </div>
+          <div class="reveal">
+            <h3 style="font-size: 2.5rem; color: var(--bl); margin-bottom: 4px;">3-7 dias</h3>
+            <p style="font-size: 0.95rem; color: var(--mu);">Prazo Médio de Entrega</p>
+          </div>
+          <div class="reveal">
+            <h3 style="font-size: 2.5rem; color: var(--pu); margin-bottom: 4px;">Zero</h3>
+            <p style="font-size: 0.95rem; color: var(--mu);">Mensalidades Escondidas</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section class="section" id="beneficios">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>Por que ter um site?</h2>
+          <p>Tudo o que seu negócio precisa para ser encontrado e escolhido.</p>
+        </div>
+
+        <div class="grid grid--4">
+          <article class="card reveal">
+            <div class="card__icon">⚡</div>
+            <h3>Rápido e moderno</h3>
+            <p>Carregamento veloz e visual atual em qualquer smartphone ou computador.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card__icon">🛡️</div>
+            <h3>Mais credibilidade</h3>
+            <p>Passe total confiança profissional e se destaque da concorrência.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card__icon">📈</div>
+            <h3>Aumente suas vendas</h3>
+            <p>Botões diretos para o WhatsApp e geração de novos contatos diariamente.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card__icon">🤖</div>
+            <h3>Automação inteligente</h3>
+            <p>Atendimento instantâneo de dúvidas para não deixar clientes esperando.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFÓLIO / PROJETOS -->
+    <section class="section section--alt" id="portfolio">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>Projetos Recentes</h2>
+          <p>Confira alguns dos trabalhos desenvolvidos pela CodeLab Digital.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <a href="https://delicias-da-jaque.vercel.app" target="_blank" rel="noopener" class="project-card reveal">
+            <div class="project-card__body">
+              <span class="project-card__tag">Confeitaria</span>
+              <h3>Delícias da Jaque ↗</h3>
+              <p>Catálogo digital responsivo com apresentação de produtos e integração direta para pedidos via WhatsApp.</p>
+            </div>
+          </a>
+
+          <a href="https://jbeletricidade.vercel.app" target="_blank" rel="noopener" class="project-card reveal">
+            <div class="project-card__body">
+              <span class="project-card__tag">Serviços Elétricos</span>
+              <h3>JB Eletricidade ↗</h3>
+              <p>Site institucional completo para empresa de infraestrutura e serviços elétricos com chamada direta para orçamento.</p>
+            </div>
+          </a>
+
+          <a href="#contato" class="project-card reveal">
+            <div class="project-card__body">
+              <span class="project-card__tag">Seu Negócio Aqui</span>
+              <h3>Sua Empresa Online ↗</h3>
+              <p>Monte a estrutura ideal para apresentar seus produtos ou serviços e receba mensagens de clientes prontos para comprar.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VÍDEO DE APRESENTAÇÃO -->
+    <section class="section" id="apresentacao">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>Conheça a CodeLab Digital</h2>
+          <p>Veja em poucos minutos como transformamos a presença do seu negócio.</p>
+        </div>
+
+        <div class="reveal" style="max-width: 850px; margin: 0 auto; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: var(--card); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+          <video controls preload="metadata" width="100%" style="display: block; border-radius: 20px;">
+            <source src="202611041032.mp4" type="video/mp4">
+            O seu navegador não suporta vídeos HTML5.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS -->
+    <section class="section section--alt" id="planos">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>Escolha seu plano</h2>
+          <p>Investimento acessível e sem mensalidades surpresas.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <article class="plan reveal">
+            <h3>Site Profissional Completo</h3>
+            <div class="plan__price"><small>R$</small>75</div>
+            <ul>
+              <li>Design moderno e 100% responsivo</li>
+              <li>Botões diretos para o seu WhatsApp</li>
+              <li>Otimizado para velocidade e SEO</li>
+            </ul>
+            <a href="#" class="btn btn--ghost js-whatsapp" data-msg="Olá! Tenho interesse no plano Site Profissional Completo (R$75).">Quero este plano</a>
+          </article>
+
+          <article class="plan plan--featured reveal">
+            <span class="plan__badge">Mais Escolhido</span>
+            <h3>Site Completo + Chatbot IA</h3>
+            <div class="plan__price"><small>R$</small>100</div>
+            <ul>
+              <li>Tudo do plano anterior</li>
+              <li>Chatbot inteligente no site</li>
+              <li>Respostas instantâneas para dúvidas</li>
+            </ul>
+            <a href="#" class="btn js-whatsapp" data-msg="Olá! Tenho interesse no plano Site Completo + Chatbot com IA (R$100).">Quero este plano</a>
+          </article>
+
+          <article class="plan reveal">
+            <h3>Combo Automação Total</h3>
+            <div class="plan__price"><small>R$</small>150</div>
+            <ul>
+              <li>Site Profissional Completo</li>
+              <li>Chatbot com IA no site</li>
+              <li>Respostas automáticas no WhatsApp</li>
+            </ul>
+            <a href="#" class="btn btn--ghost js-whatsapp" data-msg="Olá! Tenho interesse no Combo Automação Total (R$150).">Quero este plano</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="section" id="depoimentos">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>O que dizem nossos clientes</h2>
+          <p>Quem confiou no trabalho da CodeLab Digital aprova os resultados.</p>
+        </div>
+
+        <div class="grid grid--2">
+          <article class="testimonial reveal">
+            <p>"O site da minha confeitaria ficou lindo e muito prático! Os clientes já entram e clicam direto no botão para encomendar pelo WhatsApp."</p>
+            <strong>— Jaqueline (Delícias da Jaque)</strong>
+          </article>
+
+          <article class="testimonial reveal">
+            <p>"Excelente atendimento e entrega rápida. O site passou muito mais credibilidade para os serviços elétricos da minha empresa."</p>
+            <strong>— JB Eletricidade</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>Perguntas Frequentes</h2>
+          <p>Tire suas dúvidas antes de começar seu projeto.</p>
+        </div>
+
+        <div class="faq-container">
+          <details class="faq-item reveal">
+            <summary>Quanto tempo demora para o site ficar pronto?</summary>
+            <p>O prazo médio de entrega é de 3 a 7 dias úteis após o envio das informações e conteúdos do seu negócio.</p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>O site funciona bem no celular?</summary>
+            <p>Sim! Todos os nossos projetos são desenvolvidos com tecnologia responsiva, adaptando-se perfeitamente a celulares, tablets e computadores.</p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Como funciona a automação no WhatsApp?</summary>
+            <p>Configuramos fluxos de respostas automáticas para que seus clientes recebam suporte imediato e informações sobre seus produtos mesmo fora do seu horário de atendimento.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPTAÇÃO DE LEADS / ORÇAMENTO -->
+    <section class="section section--alt" id="orcamento">
+      <div class="container">
+        <div class="form-card reveal">
+          <div class="section__head">
+            <h2>Solicite um Orçamento Rápido</h2>
+            <p>Preencha os dados abaixo e entraremos em contato com você em poucos minutos!</p>
+          </div>
+
+          <form id="leadForm" class="lead-form">
+            <div class="form-group">
+              <label for="leadNome">Seu Nome / Nome da Empresa</label>
+              <input type="text" id="leadNome" placeholder="Ex: João da Silva" required />
+            </div>
+
+            <div class="form-group">
+              <label for="leadTelefone">Seu WhatsApp</label>
+              <input type="tel" id="leadTelefone" placeholder="(62) 99999-9999" maxlength="15" required />
+            </div>
+
+            <div class="form-group">
+              <label for="leadPlano">Plano de Interesse</label>
+              <select id="leadPlano" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Site Profissional Completo (R$75)">Site Profissional Completo — R$ 75</option>
+                <option value="Site Completo + Chatbot IA (R$100)">Site Completo + Chatbot IA — R$ 100</option>
+                <option value="Combo Automação Total (R$150)">Combo Automação Total — R$ 150</option>
+                <option value="Projeto Personalizado">Projeto Personalizado</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn--big" id="btnEnviar">Garantir Meu Orçamento 🚀</button>
+          </form>
+          <div id="formMsg" class="form-msg"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / CONTATO -->
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="cta reveal">
+          <h2>Pronto para impulsionar seu negócio?</h2>
+          <p>Fale diretamente conosco e solicite um orçamento sob medida.</p>
+          <a href="#" class="btn btn--big js-whatsapp" data-msg="Olá! Gostaria de um orçamento sem compromisso para criar meu site.">
+            Chamar no WhatsApp · (62) 99448-1404
+          </a>
+        </div>
+      </div>    
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <span>© <span id="year"></span> CodeLab Digital. Todos os direitos reservados.</span>
+      
+      <!-- Ícone e Link do Instagram no Rodapé -->
+      <a href="https://instagram.com/s4mizin_" target="_blank" rel="noopener" aria-label="Instagram da CodeLab Digital" style="display: flex; align-items: center; gap: 8px; color: var(--tx); text-decoration: none; font-weight: 500; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #E1306C;">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        <span>@s4mizin_</span>
+      </a>
+
+      <span>Parceria de confiança · Privacidade & Termos</span>
+    </div>
+  </footer>
+  <!-- Troca o texto simples por um link funcional -->
+<a href="privacidade.html" target="_blank" style="color: var(--mu); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--bl)'" onmouseout="this.style.color='var(--mu)'">Privacidade & Termos</a>
+
+  <!-- BANNER DE COOKIES -->
+  <div id="cookieBanner">
+    <p>Utilizamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você concorda com nossa política.</p>
+    <button id="acceptCookies">Aceitar e Continuar</button>
+  </div>
+
+  <!-- Botão flutuante WhatsApp -->
+  <a href="#" class="wpp-float js-whatsapp" data-msg="Olá! Vim pelo site da CodeLab Digital e gostaria de mais informações." aria-label="WhatsApp">💬</a>
+
+  <!-- 1. SDKs do Firebase carregados primeiro -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- 2. Inicialização das credenciais do Firebase -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDnMY90evxB8ndtLef5gewlGHjvgHx_Xxc",
+      authDomain: "codelab-digital.firebaseapp.com",
+      projectId: "codelab-digital",
+      storageBucket: "codelab-digital.firebasestorage.app",
+      messagingSenderId: "535935410610", 
+      appId: "1:535935410610:web:c277afef653a373ecfc4ab"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
+  <!-- 3. Script principal do site -->
+  <script src="index.js"></script>
+
+</body>
+</html>
